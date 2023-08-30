@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.ejobsg</groupId>
+        <artifactId>ejobsg</artifactId>
+        <version>3.6.3</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <modules>
+        <module>ejobsg-modules-system</module>
+        <module>ejobsg-modules-gen</module>
+        <module>ejobsg-modules-job</module>
+        <module>ejobsg-modules-file</module>
+    </modules>
+
+    <artifactId>ejobsg-modules</artifactId>
+    <packaging>pom</packaging>
+
+    <description>
+        ejobsg-modules业务模块
+    </description>
+
+</project>
