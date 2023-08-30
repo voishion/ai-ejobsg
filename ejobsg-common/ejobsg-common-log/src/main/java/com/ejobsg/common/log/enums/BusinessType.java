@@ -5,8 +5,7 @@ package com.ejobsg.common.log.enums;
  *
  * @author lilu
  */
-public enum BusinessType
-{
+public enum BusinessType {
     /**
      * 其它
      */
@@ -56,4 +55,9 @@ public enum BusinessType
      * 清空数据
      */
     CLEAN,
+
+    /**
+     * 查询
+     */
+    QUERY,
 }

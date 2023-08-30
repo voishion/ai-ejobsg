@@ -35,6 +35,16 @@ public @interface Log
     public OperatorType operatorType() default OperatorType.MANAGE;
 
     /**
+     * 是否保存
+     */
+    public boolean isSave() default true;
+
+    /**
+     * 是否打印
+     */
+    public boolean isPrint() default true;
+
+    /**
      * 是否保存请求的参数
      */
     public boolean isSaveRequestData() default true;

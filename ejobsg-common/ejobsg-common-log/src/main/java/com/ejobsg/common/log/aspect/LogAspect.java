@@ -2,8 +2,12 @@ package com.ejobsg.common.log.aspect;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.compress.utils.Sets;
 import org.apache.commons.lang3.ArrayUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -13,6 +17,7 @@ import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
@@ -45,6 +50,12 @@ public class LogAspect
 
     /** 计算操作消耗时间 */
     private static final ThreadLocal<Long> TIME_THREADLOCAL = new NamedThreadLocal<Long>("Cost Time");
+
+    /** 允许打印请求日志的环境 */
+    private static final Set<String> profiles = Sets.newHashSet("local","default", "dev", "prod");
+
+    @Value("${spring.profiles.active}")
+    private String active;
 
     @Autowired
     private AsyncLogService asyncLogService;
@@ -114,7 +125,13 @@ public class LogAspect
             // 设置消耗时间
             operLog.setCostTime(System.currentTimeMillis() - TIME_THREADLOCAL.get());
             // 保存数据库
-            asyncLogService.saveSysLog(operLog);
+            if (controllerLog.isSave()) {
+                asyncLogService.saveSysLog(operLog);
+            }
+            // 打印请求日志
+            if (profiles.contains(active) && controllerLog.isPrint()) {
+                print(operLog);
+            }
         }
         catch (Exception exp)
         {
@@ -126,6 +143,24 @@ public class LogAspect
         {
             TIME_THREADLOCAL.remove();
         }
+    }
+
+    /**
+     * 打印请求日志
+     *
+     * @param operLog 操作日志
+     */
+    private void print(SysOperLog operLog) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("请求响应日志信息：\n【请求地址】:").append("【").append(StringUtils.format("{} / {}", operLog.getOperUrl(), operLog.getRequestMethod())).append("】");
+        stringBuilder.append("\n【操作模块】:").append("【").append(StringUtils.format("{} / {}", operLog.getTitle(), operLog.getBusinessType())).append("】");
+        stringBuilder.append("\n【登录信息】:").append("【").append(StringUtils.format("{} / {}", operLog.getOperName(), operLog.getOperIp())).append("】");
+        stringBuilder.append("\n【操作方法】:").append("【").append(operLog.getMethod()).append("】");
+        stringBuilder.append("\n【请求参数】:").append("【").append(operLog.getOperParam()).append("】");
+        stringBuilder.append("\n【返回参数】:").append("【").append(operLog.getJsonResult()).append("】");
+        String status = Objects.equals(0, operLog.getStatus()) ? "正常" : "异常";
+        stringBuilder.append("\n【消耗时间】:").append("【").append(StringUtils.format("{} | {} 毫秒", status, operLog.getCostTime())).append("】\n");
+        log.info(stringBuilder.toString());
     }
 
     /**
