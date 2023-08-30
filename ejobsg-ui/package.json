@@ -1,7 +1,7 @@
 {
   "name": "ejobsg",
   "version": "3.6.3",
-  "description": "若依管理系统",
+  "description": "狮城易聘CRM",
   "author": "若依",
   "license": "MIT",
   "scripts": {
