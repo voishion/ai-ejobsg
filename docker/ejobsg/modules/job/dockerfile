@@ -1,0 +1,15 @@
+# 基础镜像
+FROM  openjdk:8-jre
+# author
+MAINTAINER ejobsg
+
+# 挂载目录
+VOLUME /home/ejobsg
+# 创建目录
+RUN mkdir -p /home/ejobsg
+# 指定路径
+WORKDIR /home/ejobsg
+# 复制jar文件到路径
+COPY ./jar/ejobsg-modules-job.jar /home/ejobsg/ejobsg-modules-job.jar
+# 启动定时任务服务
+ENTRYPOINT ["java","-jar","ejobsg-modules-job.jar"]
