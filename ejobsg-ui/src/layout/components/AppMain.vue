@@ -11,10 +11,26 @@
 
 <script>
 import iframeToggle from "./IframeToggle/index"
+import watermark from "watermark-dom"
 
 export default {
   name: 'AppMain',
   components: { iframeToggle },
+  mounted() {
+    watermark.load({
+      watermark_txt: this.$store.state.user.name + "©ejobsg.李露",
+      watermark_x:0,
+      watermark_y:0,
+      watermark_x_space:10,
+      watermark_y_space:5,
+      watermark_color:'#A0A0A0',
+      watermark_fontsize: '14px',
+      watermark_alpha: 0.15,
+      watermark_angle: 25,
+      watermark_width: 150,
+      watermark_height: 60
+    });
+  },
   computed: {
     cachedViews() {
       return this.$store.state.tagsView.cachedViews
