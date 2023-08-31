@@ -22,11 +22,11 @@
           >
           <br />
           阿里云服务器折扣区
-          <el-link href="http://aly.ejobsg.vip" type="primary" target="_blank"
+          <el-link href="http://aly.ejobsg.com" type="primary" target="_blank"
             >>☛☛点我进入☚☚</el-link
           >
           &nbsp;&nbsp;&nbsp; 腾讯云服务器秒杀区
-          <el-link href="http://txy.ejobsg.vip" type="primary" target="_blank"
+          <el-link href="http://txy.ejobsg.com" type="primary" target="_blank"
             >>☛☛点我进入☚☚</el-link
           ><br />
           <h4 class="text-danger">
@@ -41,7 +41,7 @@
       <el-col :sm="24" :lg="12" style="padding-left: 20px">
         <h2>若依后台管理框架</h2>
         <p>
-          一直想做一款后台管理系统，看了很多优秀的开源项目但是发现没有合适自己的。于是利用空闲休息时间开始自己写一套后台系统。如此有了狮城易聘CRM，她可以用于所有的Web应用程序，如网站管理后台，网站会员中心，CMS，CRM，OA等等，当然，您也可以对她进行深度定制，以做出更强系统。所有前端后台代码封装过后十分精简易上手，出错概率低。同时支持移动客户端访问。系统会陆续更新一些实用功能。
+          一直想做一款后台管理系统，看了很多优秀的开源项目但是发现没有合适自己的。于是利用空闲休息时间开始自己写一套后台系统。如此有了若依^v^，她可以用于所有的Web应用程序，如网站管理后台，网站会员中心，CMS，CRM，OA等等，当然，您也可以对她进行深度定制，以做出更强系统。所有前端后台代码封装过后十分精简易上手，出错概率低。同时支持移动客户端访问。系统会陆续更新一些实用功能。
         </p>
         <p>
           <b>当前版本:</b> <span>v{{ version }}</span>
@@ -62,7 +62,7 @@
             size="mini"
             icon="el-icon-s-home"
             plain
-            @click="goTarget('http://ejobsg.vip')"
+            @click="goTarget('http://ejobsg.com')"
             >访问主页</el-button
           >
         </p>
@@ -845,7 +845,7 @@
             </el-collapse-item>
             <el-collapse-item title="v1.0.0 - 2020-05-20">
               <ol>
-                <li>狮城易聘CRM系统正式发布</li>
+                <li>若依^v^系统正式发布</li>
               </ol>
             </el-collapse-item>
           </el-collapse>

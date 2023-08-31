@@ -7,7 +7,7 @@ function resolve(dir) {
 
 const CompressionPlugin = require('compression-webpack-plugin')
 
-const name = process.env.VUE_APP_TITLE || '狮城易聘CRM' // 网页标题
+const name = process.env.VUE_APP_TITLE || '若依^v^' // 网页标题
 
 const port = process.env.port || process.env.npm_config_port || 80 // 端口
 
@@ -59,7 +59,7 @@ module.exports = {
       }
     },
     plugins: [
-      // http://doc.ejobsg.vip/ejobsg-vue/other/faq.html#使用gzip解压缩静态文件
+      // http://doc.ejobsg.com/ejobsg-vue/other/faq.html#使用gzip解压缩静态文件
       new CompressionPlugin({
         cache: false,                   // 不启用文件缓存
         test: /\.(js|css|html)?$/i,     // 压缩文件格式

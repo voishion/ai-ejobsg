@@ -9,7 +9,7 @@ export default {
   name: 'EjobsgDoc',
   data() {
     return {
-      url: 'http://doc.ejobsg.vip/ejobsg-cloud'
+      url: 'http://doc.ejobsg.com/ejobsg-cloud'
     }
   },
   methods: {

@@ -42,6 +42,7 @@ nbdist/
 *.swp
 logs/
 data/
+uploadPath/
 
 !*/build/*.java
 !*/build/*.html
