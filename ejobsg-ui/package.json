@@ -2,7 +2,7 @@
   "name": "ejobsg",
   "version": "3.6.3",
   "description": "若依^v^",
-  "author": "若依",
+  "author": "lilu",
   "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve",
