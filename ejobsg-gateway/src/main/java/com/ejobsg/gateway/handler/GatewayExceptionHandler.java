@@ -19,33 +19,29 @@ import reactor.core.publisher.Mono;
  */
 @Order(-1)
 @Configuration
-public class GatewayExceptionHandler implements ErrorWebExceptionHandler
-{
+public class GatewayExceptionHandler implements ErrorWebExceptionHandler {
+
     private static final Logger log = LoggerFactory.getLogger(GatewayExceptionHandler.class);
 
     @Override
-    public Mono<Void> handle(ServerWebExchange exchange, Throwable ex)
-    {
+    public Mono<Void> handle(ServerWebExchange exchange, Throwable ex) {
         ServerHttpResponse response = exchange.getResponse();
 
-        if (exchange.getResponse().isCommitted())
-        {
+        if (exchange.getResponse().isCommitted()) {
             return Mono.error(ex);
         }
 
         String msg;
 
-        if (ex instanceof NotFoundException)
-        {
+        if (ex instanceof NotFoundException) {
             msg = "服务未找到";
-        }
-        else if (ex instanceof ResponseStatusException)
-        {
+        } else if (ex instanceof ResponseStatusException) {
             ResponseStatusException responseStatusException = (ResponseStatusException) ex;
             msg = responseStatusException.getMessage();
-        }
-        else
-        {
+            if ("/favicon.ico".equals(exchange.getRequest().getPath().toString())) {
+                return ServletUtils.webFluxResponseWriter(response, msg);
+            }
+        } else {
             msg = "内部服务器错误";
         }
 
@@ -53,4 +49,5 @@ public class GatewayExceptionHandler implements ErrorWebExceptionHandler
 
         return ServletUtils.webFluxResponseWriter(response, msg);
     }
+
 }

@@ -1,34 +1,34 @@
 package com.ejobsg.common.swagger.config;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Predicate;
+import com.github.xiaoymin.knife4j.spring.extension.OpenApiExtensionResolver;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.ApiKey;
-import springfox.documentation.service.AuthorizationScope;
-import springfox.documentation.service.Contact;
-import springfox.documentation.service.SecurityReference;
-import springfox.documentation.service.SecurityScheme;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.ApiSelectorBuilder;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
+
 @Configuration
 @EnableSwagger2
+@RequiredArgsConstructor
 @EnableConfigurationProperties(SwaggerProperties.class)
 @ConditionalOnProperty(name = "swagger.enabled", matchIfMissing = true)
-@Import({SwaggerBeanPostProcessor.class, SwaggerWebConfiguration.class})
+@Import({BeanValidatorPluginsConfiguration.class, SwaggerBeanPostProcessor.class, SwaggerWebConfiguration.class})
 public class SwaggerAutoConfiguration
 {
     /**
@@ -37,6 +37,8 @@ public class SwaggerAutoConfiguration
     private static final List<String> DEFAULT_EXCLUDE_PATH = Arrays.asList("/error", "/actuator/**");
 
     private static final String BASE_PATH = "/**";
+
+    private final OpenApiExtensionResolver openApiExtensionResolver;
 
     @Bean
     public Docket api(SwaggerProperties swaggerProperties)
@@ -60,7 +62,8 @@ public class SwaggerAutoConfiguration
         swaggerProperties.getExcludePath().forEach(path -> excludePath.add(PathSelectors.ant(path)));
 
         ApiSelectorBuilder builder = new Docket(DocumentationType.SWAGGER_2).host(swaggerProperties.getHost())
-                .apiInfo(apiInfo(swaggerProperties)).select()
+                .apiInfo(apiInfo(swaggerProperties))
+                .extensions(openApiExtensionResolver.buildSettingExtensions()).select()
                 .apis(RequestHandlerSelectors.basePackage(swaggerProperties.getBasePackage()));
 
         swaggerProperties.getBasePath().forEach(p -> builder.paths(PathSelectors.ant(p)));
@@ -120,4 +123,5 @@ public class SwaggerAutoConfiguration
              .version(swaggerProperties.getVersion())
              .build();
     }
+
 }
