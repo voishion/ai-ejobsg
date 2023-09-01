@@ -35,8 +35,10 @@ services:
       - "3306:3306"
     volumes:
       - ./mysql/conf:/etc/mysql/conf.d
-      - ./mysql/logs:/logs
-      - ./mysql/data:/var/lib/mysql
+#      - ./mysql/logs:/logs
+#      - ./mysql/data:/var/lib/mysql
+      - /Users/voishion/work/server/docker/mysql-ejobsg/logs:/logs
+      - /Users/voishion/work/server/docker/mysql-ejobsg/data:/var/lib/mysql
     command: [
           'mysqld',
           '--default-authentication-plugin=mysql_native_password',
@@ -48,7 +50,6 @@ services:
         ]
     environment:
       MYSQL_ROOT_HOST: '%'
-      MYSQL_DATABASE: 'ai-ejobsg'
       MYSQL_ROOT_PASSWORD: feaafeaadf6b4e61be1037dd6d522ef1
 
   ejobsg-redis:
@@ -60,7 +61,10 @@ services:
       - "6379:6379"
     volumes:
       - ./redis/conf/redis.conf:/home/ejobsg/redis/redis.conf:rw
-      - ./redis/data:/data:rw
+#      - ./redis/data:/data:rw
+#      - ./redis/logs:/logs:rw
+      - /Users/voishion/work/server/docker/redis-ejobsg/data:/data:rw
+      - /Users/voishion/work/server/docker/redis-ejobsg/logs:/logs:rw
     command: redis-server /home/ejobsg/redis/redis.conf --appendonly yes
 
   ejobsg-nginx:

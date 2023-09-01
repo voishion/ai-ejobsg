@@ -1,4 +1,4 @@
-#set(tableComment = isNotBlank(table.getComment()) ? table.getComment() : 'TABLE_NAME')
+#set(tableComment = isNotBlank(table.getComment()) ? table.getComment() : '$$TABLE_NAME$$')
 #set(entityVarName = firstCharToLowerCase(table.buildEntityClassName()))
 #set(isCacheExample = serviceImplConfig.cacheExample)
 #set(primaryKey = table.getPrimaryKey())

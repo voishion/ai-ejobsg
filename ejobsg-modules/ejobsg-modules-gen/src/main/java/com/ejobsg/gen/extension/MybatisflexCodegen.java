@@ -27,16 +27,16 @@ public class MybatisflexCodegen {
 
         String[] tablePrefix = new String[]{"tb_", "t_", "sys_", "biz_"};
         String[] tables = new String[]{"face_compare_request_log"};
-        tables = new String[]{"document_catalogue_base"};
-        tables = new String[]{"document_library_base"};
+        //tables = new String[]{"document_catalogue_base"};
+        //tables = new String[]{"document_library_base"};
 
         String shortJdbcUrl = "jdbc:mysql://localhost:3306/ai-ejobsg";
         String username = "root";
         String password = "feaafeaadf6b4e61be1037dd6d522ef1";
 
-        shortJdbcUrl = "jdbc:mysql://10.152.160.66:59967/wenku";
-        username = "db_admin";
-        password = "mKw=5RunIRyM";
+        //shortJdbcUrl = "jdbc:mysql://10.152.160.66:59967/wenku";
+        //username = "db_admin";
+        //password = "mKw=5RunIRyM";
 
         generate(applicationName, basePackage, tablePrefix, tables, shortJdbcUrl, username, password);
     }

@@ -1,5 +1,5 @@
-#set(tableComment = isNotBlank(table.getComment()) ? table.getComment() : 'TABLE_NAME')
-#set(permissionPrefix = 'PERMISSION_PREFIX')
+#set(tableComment = isNotBlank(table.getComment()) ? table.getComment() : '$$TABLE_NAME$$')
+#set(permissionPrefix = '$$PERMISSION_PREFIX$$')
 #set(entityClassName = table.buildEntityClassName())
 #set(entityVarName = firstCharToLowerCase(entityClassName))
 #set(serviceVarName = firstCharToLowerCase(table.buildServiceClassName()))

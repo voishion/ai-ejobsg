@@ -1,4 +1,4 @@
-#set(tableComment = isNotBlank(table.getComment()) ? table.getComment() : 'TABLE_NAME')
+#set(tableComment = isNotBlank(table.getComment()) ? table.getComment() : '$$TABLE_NAME$$')
 package #(packageConfig.mapperPackage);
 
 #if(mapperConfig.isMapperAnnotation())
