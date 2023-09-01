@@ -17,6 +17,7 @@
         <module>ejobsg-common-security</module>
         <module>ejobsg-common-datascope</module>
         <module>ejobsg-common-datasource</module>
+        <module>ejobsg-common-business</module>
     </modules>
 
     <artifactId>ejobsg-common</artifactId>

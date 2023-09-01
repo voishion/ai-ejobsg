@@ -233,6 +233,13 @@
                 <version>${ejobsg.version}</version>
             </dependency>
 
+            <!-- 业务相关 -->
+            <dependency>
+                <groupId>com.ejobsg</groupId>
+                <artifactId>ejobsg-common-business</artifactId>
+                <version>${ejobsg.version}</version>
+            </dependency>
+
             <!-- 系统接口 -->
             <dependency>
                 <groupId>com.ejobsg</groupId>
