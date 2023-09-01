@@ -23,6 +23,13 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
+        <!-- Redisson 锁功能 -->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>3.21.1</version>
+        </dependency>
+
         <!-- Ejobsg Common Core-->
         <dependency>
             <groupId>com.ejobsg</groupId>
