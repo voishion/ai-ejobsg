@@ -1,12 +1,16 @@
 package com.ejobsg.common.redis.configure;
 
+import cn.hutool.core.util.StrUtil;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
+import org.redisson.config.SingleServerConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.Optional;
 
 /**
  * redisson配置
@@ -25,11 +29,20 @@ public class RedissonConfig {
     @Value("${spring.redis.password}")
     private String password;
 
+    @Value("${spring.redis.database}")
+    private Integer database;
+
     @Bean(destroyMethod = "shutdown")
     @ConditionalOnMissingBean(RedissonClient.class)
     public RedissonClient redissonClient() {
+        String url = StrUtil.format("redis://{}:{}", host, port);
         Config config = new Config();
-        config.useSingleServer().setAddress("redis://" + host + ":" + port);
+        SingleServerConfig singleServerConfig = config.useSingleServer();
+        singleServerConfig.setAddress(url);
+        singleServerConfig.setDatabase(Optional.ofNullable(database).orElse(0));
+        if (StrUtil.isNotBlank(password)) {
+            singleServerConfig.setPassword(password);
+        }
         return Redisson.create(config);
     }
 
