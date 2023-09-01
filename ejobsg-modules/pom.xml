@@ -9,10 +9,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <modules>
-        <module>ejobsg-modules-system</module>
         <module>ejobsg-modules-gen</module>
         <module>ejobsg-modules-job</module>
         <module>ejobsg-modules-file</module>
+        <module>ejobsg-modules-system</module>
+        <module>ejobsg-modules-recruitment</module>
     </modules>
 
     <artifactId>ejobsg-modules</artifactId>
