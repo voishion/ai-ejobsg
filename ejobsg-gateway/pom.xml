@@ -74,6 +74,12 @@
         <dependency>
             <groupId>com.ejobsg</groupId>
             <artifactId>ejobsg-common-redis</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.redisson</groupId>
+                    <artifactId>redisson-spring-boot-starter</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- Swagger

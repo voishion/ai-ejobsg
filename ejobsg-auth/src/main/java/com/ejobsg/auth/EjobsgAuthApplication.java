@@ -3,14 +3,14 @@ package com.ejobsg.auth;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import com.ejobsg.common.security.annotation.EnableRyFeignClients;
+import com.ejobsg.common.security.annotation.EnableEjFeignClients;
 
 /**
  * 认证授权中心
  *
  * @author lilu
  */
-@EnableRyFeignClients
+@EnableEjFeignClients
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class EjobsgAuthApplication {
 

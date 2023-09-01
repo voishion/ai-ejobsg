@@ -1,4 +1,2 @@
 com.ejobsg.common.redis.configure.RedisConfig
-com.ejobsg.common.redis.service.RedisService
 com.ejobsg.common.redis.configure.RedissonConfig
-com.ejobsg.common.redis.service.RedissonLockService

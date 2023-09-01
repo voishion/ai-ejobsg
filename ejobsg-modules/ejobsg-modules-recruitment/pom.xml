@@ -100,6 +100,12 @@
             <artifactId>ejobsg-common-swagger</artifactId>
         </dependency>
 
+        <!-- Ejobsg Common Business -->
+        <dependency>
+            <groupId>com.ejobsg</groupId>
+            <artifactId>ejobsg-common-business</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -5,7 +5,7 @@ import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.ejobsg.common.security.annotation.EnableCustomConfig;
-import com.ejobsg.common.security.annotation.EnableRyFeignClients;
+import com.ejobsg.common.security.annotation.EnableEjFeignClients;
 import com.ejobsg.common.swagger.annotation.EnableCustomSwagger2;
 
 /**
@@ -15,7 +15,7 @@ import com.ejobsg.common.swagger.annotation.EnableCustomSwagger2;
  */
 @EnableCustomConfig
 @EnableCustomSwagger2
-@EnableRyFeignClients
+@EnableEjFeignClients
 @SpringBootApplication(exclude = MybatisAutoConfiguration.class)
 @MapperScan("com.ejobsg.recruitment.mapper")
 public class EjobsgRecruitmentApplication {

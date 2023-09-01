@@ -1,9 +1,8 @@
 package com.ejobsg.common.redis.service;
 
+import lombok.RequiredArgsConstructor;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,11 +11,10 @@ import java.util.concurrent.TimeUnit;
  *
  * @author lilu
  */
-@Component
+@RequiredArgsConstructor
 public class RedissonLockService {
 
-    @Autowired
-    private RedissonClient redissonClient;
+    private final RedissonClient redissonClient;
 
     /**
      * 获取锁

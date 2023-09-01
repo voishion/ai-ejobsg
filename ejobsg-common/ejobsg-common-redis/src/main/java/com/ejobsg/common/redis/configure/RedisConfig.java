@@ -1,6 +1,8 @@
 package com.ejobsg.common.redis.configure;
 
+import com.ejobsg.common.redis.service.RedisService;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -21,7 +23,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 public class RedisConfig extends CachingConfigurerSupport {
 
     @Bean
-    @SuppressWarnings(value = {"unchecked", "rawtypes"})
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
         RedisTemplate<Object, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory);
@@ -38,6 +39,12 @@ public class RedisConfig extends CachingConfigurerSupport {
 
         template.afterPropertiesSet();
         return template;
+    }
+
+    @Bean
+    @ConditionalOnBean(RedisTemplate.class)
+    public RedisService redisService(RedisTemplate redisTemplate) {
+        return new RedisService(redisTemplate);
     }
 
 }
