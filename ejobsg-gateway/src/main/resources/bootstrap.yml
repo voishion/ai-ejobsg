@@ -1,4 +1,4 @@
-# Tomcat
+# Undertow
 server:
   port: 8080
 

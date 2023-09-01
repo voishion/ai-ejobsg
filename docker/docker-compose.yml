@@ -88,7 +88,7 @@ services:
     container_name: ejobsg-gateway
     build:
       context: ./ejobsg/gateway
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     depends_on:
@@ -100,7 +100,7 @@ services:
     container_name: ejobsg-auth
     build:
       context: ./ejobsg/auth
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     ports:
       - "9200:9200"
     depends_on:
@@ -112,7 +112,7 @@ services:
     container_name: ejobsg-modules-system
     build:
       context: ./ejobsg/modules/system
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     ports:
       - "9201:9201"
     depends_on:
@@ -126,7 +126,7 @@ services:
     container_name: ejobsg-modules-gen
     build:
       context: ./ejobsg/modules/gen
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     ports:
       - "9202:9202"
     depends_on:
@@ -138,7 +138,7 @@ services:
     container_name: ejobsg-modules-job
     build:
       context: ./ejobsg/modules/job
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     ports:
       - "9203:9203"
     depends_on:
@@ -150,7 +150,7 @@ services:
     container_name: ejobsg-modules-file
     build:
       context: ./ejobsg/modules/file
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     ports:
       - "9300:9300"
     volumes:
@@ -160,7 +160,7 @@ services:
     container_name: ejobsg-visual-monitor
     build:
       context: ./ejobsg/visual/monitor
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
     ports:
       - "9100:9100"
 
