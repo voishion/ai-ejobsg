@@ -14,8 +14,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Optional;
-
 /**
  * redisson配置
  *
@@ -44,10 +42,10 @@ public class RedissonConfig {
         Config config = new Config();
         SingleServerConfig singleServerConfig = config.useSingleServer();
         singleServerConfig.setAddress(url);
-        //singleServerConfig.setDatabase(database);
-        //if (StrUtil.isNotBlank(password)) {
-        //    singleServerConfig.setPassword(password);
-        //}
+        singleServerConfig.setDatabase(database);
+        if (StrUtil.isNotBlank(password)) {
+            singleServerConfig.setPassword(password);
+        }
         return Redisson.create(config);
     }
 

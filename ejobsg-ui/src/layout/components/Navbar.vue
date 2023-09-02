@@ -10,11 +10,11 @@
         <search id="header-search" class="right-menu-item" />
 
         <el-tooltip content="源码地址" effect="dark" placement="bottom">
-          <ruo-yi-git id="ejobsg-git" class="right-menu-item hover-effect" />
+          <ejobsg-git id="ejobsg-git" class="right-menu-item hover-effect" />
         </el-tooltip>
 
         <el-tooltip content="文档地址" effect="dark" placement="bottom">
-          <ruo-yi-doc id="ejobsg-doc" class="right-menu-item hover-effect" />
+          <ejobsg-doc id="ejobsg-doc" class="right-menu-item hover-effect" />
         </el-tooltip>
 
         <screenfull id="screenfull" class="right-menu-item hover-effect" />

@@ -9,7 +9,7 @@ export default {
   name: 'EjobsgGit',
   data() {
     return {
-      url: 'https://gitee.com/y_project/Ejobsg-Cloud'
+      url: 'https://gitee.com/voishion/ai-ejobsg'
     }
   },
   methods: {

@@ -6,9 +6,9 @@
 package #(packageConfig.serviceImplPackage);
 
 import #(serviceImplConfig.buildSuperClassImport());
-import com.ejobsg.common.core.utils.DateUtils;
 import com.ejobsg.common.core.utils.StringUtils;
 import com.ejobsg.common.core.utils.bean.PageReq;
+import com.ejobsg.common.security.utils.SecurityUtils;
 import #(packageConfig.entityPackage).#(table.buildEntityClassName());
 import #(packageConfig.mapperPackage).#(table.buildMapperClassName());
 import #(packageConfig.servicePackage).#(table.buildServiceClassName());
@@ -53,12 +53,12 @@ public class #(table.buildServiceImplClassName()) extends #(serviceImplConfig.bu
 
     @Override
     public List<#(entityClassName)> select#(entityClassName)List(#(entityClassName) #(entityVarName)) {
-        return this.list(QueryWrapper.create(#(entityVarName)).from(#(entityClassName)));
+        return this.list(defaultQueryWrapper(#(entityVarName)));
     }
 
     @Override
     public Page<#(entityClassName)> select#(entityClassName)Page(PageReq<#(entityClassName)> page, #(entityClassName) #(entityVarName)) {
-        QueryWrapper wrapper = QueryWrapper.create(#(entityVarName)).from(#(entityClassName));
+        QueryWrapper wrapper = defaultQueryWrapper(#(entityVarName));
         if (StringUtils.isNotBlank(page.getOrderBy())) {
             wrapper.orderBy(page.getOrderBy());
         }
@@ -67,13 +67,13 @@ public class #(table.buildServiceImplClassName()) extends #(serviceImplConfig.bu
 
     @Override
     public int insert#(entityClassName)(#(entityClassName) #(entityVarName)) {
-        #(entityVarName).setCreateTime(DateUtils.getNowDate());
+        #(entityVarName).setCreateBy(SecurityUtils.getUsername());
         return this.save(#(entityVarName)) ? 1 : 0;
     }
 
     @Override
     public int update#(entityClassName)(#(entityClassName) #(entityVarName)) {
-        #(entityVarName).setUpdateTime(DateUtils.getNowDate());
+        #(entityVarName).setUpdateBy(SecurityUtils.getUsername());
         return this.updateById(#(entityVarName)) ? 1 : 0;
     }
 

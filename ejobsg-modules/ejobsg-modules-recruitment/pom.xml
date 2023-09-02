@@ -64,6 +64,10 @@
             <artifactId>mybatis-flex-processor</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.mybatis-flex</groupId>
+            <artifactId>mybatis-flex-core</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
         </dependency>

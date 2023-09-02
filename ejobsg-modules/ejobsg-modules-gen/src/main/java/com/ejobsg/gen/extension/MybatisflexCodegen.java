@@ -5,7 +5,7 @@ import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import com.ejobsg.common.core.web.controller.BaseController;
-import com.ejobsg.common.core.web.domain.BaseEntity;
+import com.ejobsg.common.core.web.domain.BaseEntityFX;
 import com.mybatisflex.codegen.Generator;
 import com.mybatisflex.codegen.config.EntityConfig;
 import com.mybatisflex.codegen.config.GlobalConfig;
@@ -109,7 +109,7 @@ public class MybatisflexCodegen {
                 .setOverwriteEnable(true)
                 .setWithLombok(true)
                 .setWithSwagger(true)
-                .setSuperClass(BaseEntity.class)
+                .setSuperClass(BaseEntityFX.class)
                 .setSwaggerVersion(EntityConfig.SwaggerVersion.FOX);
 
         // Mapper 生成配置

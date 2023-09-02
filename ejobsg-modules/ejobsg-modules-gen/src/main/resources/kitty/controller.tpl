@@ -75,7 +75,7 @@ public class #(table.buildControllerClassName()) #if(controllerConfig.superClass
     @ApiOperationSupport(order = 1, author = "#(javadocConfig.getAuthor())")
     @RequiresPermissions("#(permissionPrefix):list")
     @GetMapping("/list")
-    public TableDataInfo list(@RequestBody #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("#(tableComment)") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description="#(tableComment)")#end #(entityClassName) #(entityVarName)) {
+    public TableDataInfo list(#if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("#(tableComment)") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description="#(tableComment)")#end #(entityClassName) #(entityVarName)) {
         return getDataTable(#(serviceVarName).select#(entityClassName)Page(loadPage(), #(entityVarName)));
     }
 
@@ -89,7 +89,7 @@ public class #(table.buildControllerClassName()) #if(controllerConfig.superClass
     @RequiresPermissions("#(permissionPrefix):export")
     @Log(title = "#(tableComment)", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(@RequestBody #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("#(tableComment)") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description="#(tableComment)")#end #(entityClassName) #(entityVarName), HttpServletResponse response) {
+    public void export(#if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("#(tableComment)") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description="#(tableComment)")#end #(entityClassName) #(entityVarName), HttpServletResponse response) {
         List<#(entityClassName)> list = #(serviceVarName).select#(entityClassName)List(#(entityVarName));
         ExcelUtil<#(entityClassName)> util = new ExcelUtil<>(#(entityClassName).class);
         util.exportExcel(response, list, "#(tableComment)数据");

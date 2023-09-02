@@ -33,7 +33,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://gitee.com/y_project/Ejobsg-Cloud.git"
+    "url": "https://gitee.com/voishion/ai-ejobsg.git"
   },
   "dependencies": {
     "@riophae/vue-treeselect": "0.4.0",

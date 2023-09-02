@@ -79,7 +79,7 @@ public class #(entityClassName)#if(withActiveRecord) extends Model<#(entityClass
     #if(withSwagger && swaggerVersion.getName() == "DOC")
     @Schema(description = "#(column.comment)")
     #end
-    @Excel(name = "#(column.comment)")
+    @Excel(sort = 1, name = "#(column.comment)")
     private #(column.propertySimpleType) #(column.property)#if(isNotBlank(column.propertyDefaultValue)) = #(column.propertyDefaultValue)#end;
 
 #end
