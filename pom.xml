@@ -38,6 +38,7 @@
         <poi.version>4.1.2</poi.version>
         <transmittable-thread-local.version>2.14.3</transmittable-thread-local.version>
         <hutool-all.version>5.8.15</hutool-all.version>
+        <redisson-spring.version>3.16.2</redisson-spring.version>
     </properties>
 
     <!-- 依赖声明 -->
