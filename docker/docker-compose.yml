@@ -22,9 +22,10 @@ services:
     image: bladex/sentinel-dashboard:1.8.0
     environment:
       - TZ=Asia/Shanghai
-      - JAVA_OPTS="-Dserver.port=8718 -Dproject.name=ejobsg-sentinel-dashboard -Dcsp.sentinel.dashboard.server=ejobsg-sentinel:8718 -Dsentinel.dashboard.auth.username=sentinel -Dsentinel.dashboard.auth.password=sentinel -Dserver.servlet.session.timeout=7200 -Djava.security.egd=file:/dev/./urandom"
+      - JAVA_OPTS="-Dserver.port=8718 -Dproject.name=ejobsg-sentinel-dashboard -Dcsp.sentinel.dashboard.server=ejobsg-sentinel:8718 -Dsentinel.dashboard.auth.username=sentinel -Dsentinel.dashboard.auth.password=sentinel -Dserver.servlet.session.timeout=7200"
     ports:
       - "8718:8858"
+      - "8719:8719"
 
   ejobsg-mysql:
     container_name: ejobsg-mysql

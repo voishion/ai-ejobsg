@@ -16,3 +16,6 @@ WORKDIR /home/ejobsg
 COPY ./jar/ejobsg-gateway.jar /home/ejobsg/ejobsg-gateway.jar
 # 启动网关服务
 ENTRYPOINT ["java", "-jar", "ejobsg-gateway.jar", "--spring.profiles.active=dev", "-Djava.security.egd=file:/dev/./urandom"]
+
+EXPOSE 8080
+EXPOSE 8719-8729
