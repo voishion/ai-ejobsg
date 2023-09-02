@@ -15,7 +15,7 @@ echo "begin copy sql "
 
 # copy html
 echo "begin copy html "
-#cp -r ../ejobsg-ui/dist/** ./nginx/html/dist
+cp -r ../ejobsg-ui/dist/** ./nginx/html/dist
 
 
 # copy jar
@@ -39,4 +39,7 @@ cp ../ejobsg-modules/ejobsg-modules-job/target/ejobsg-modules-job.jar ./ejobsg/m
 
 echo "begin copy ejobsg-modules-gen "
 cp ../ejobsg-modules/ejobsg-modules-gen/target/ejobsg-modules-gen.jar ./ejobsg/modules/gen/jar
+
+echo "begin copy ejobsg-modules-recruitment "
+cp ../ejobsg-modules/ejobsg-modules-recruitment/target/ejobsg-modules-recruitment.jar ./ejobsg/modules/recruitment/jar
 

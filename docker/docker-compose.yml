@@ -75,8 +75,8 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./nginx/html/dist:/home/ejobsg/projects/ejobsg-ui
-      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+#      - ./nginx/html/dist:/home/ejobsg/projects/ejobsg-ui
+#      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/logs:/var/log/nginx
       - ./nginx/conf.d:/etc/nginx/conf.d
     depends_on:
@@ -115,6 +115,20 @@ services:
       dockerfile: Dockerfile
     ports:
       - "9201:9201"
+    depends_on:
+      - ejobsg-redis
+      - ejobsg-mysql
+    links:
+      - ejobsg-redis
+      - ejobsg-mysql
+
+  ejobsg-modules-recruitment:
+    container_name: ejobsg-modules-recruitment
+    build:
+      context: ./ejobsg/modules/recruitment
+      dockerfile: Dockerfile
+    ports:
+      - "9204:9204"
     depends_on:
       - ejobsg-redis
       - ejobsg-mysql
