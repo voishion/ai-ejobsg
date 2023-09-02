@@ -8,9 +8,10 @@ usage() {
 
 # copy sql
 echo "begin copy sql "
-#cp ../sql/ai-ejobsg-20230706.sql ./mysql/db
-#cp ../sql/ai-ejobsg-config-20220929.sql ./mysql/db
-#cp ../sql/ai-ejobsg-seata-20210128.sql ./mysql/db
+rm -rf ./mysql/db/*
+cp ../sql/ai-ejobsg.sql ./mysql/db
+cp ../sql/ai-ejobsg-config.sql ./mysql/db
+cp ../sql/ai-ejobsg-seata.sql ./mysql/db
 
 # copy html
 echo "begin copy html "
