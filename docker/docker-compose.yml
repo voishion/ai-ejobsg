@@ -18,11 +18,11 @@ services:
       - ejobsg-mysql
 
   ejobsg-sentinel:
-    image: bladex/sentinel-dashboard:1.8.0
     container_name: ejobsg-sentinel
+    image: bladex/sentinel-dashboard:1.8.0
     environment:
       - TZ=Asia/Shanghai
-      - JAVA_OPTS="-Dserver.port=8718 -Dproject.name=ejobsg-sentinel-dashboard -Dcsp.sentinel.dashboard.server=localhost:8718 -Dsentinel.dashboard.auth.username=sentinel -Dsentinel.dashboard.auth.password=sentinel -Dserver.servlet.session.timeout=7200 -Djava.security.egd=file:/dev/./urandom -Dcsp.sentinel.api.port=8719"
+      - JAVA_OPTS="-Dserver.port=8718 -Dproject.name=ejobsg-sentinel-dashboard -Dcsp.sentinel.dashboard.server=ejobsg-sentinel:8718 -Dsentinel.dashboard.auth.username=sentinel -Dsentinel.dashboard.auth.password=sentinel -Dserver.servlet.session.timeout=7200 -Djava.security.egd=file:/dev/./urandom"
     ports:
       - "8718:8858"
 
