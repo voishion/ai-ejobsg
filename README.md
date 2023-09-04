@@ -6,6 +6,9 @@ ai-ejobsg
 #### 软件架构
 [基于RuoYi-Cloud开发](https://gitee.com/y_project/RuoYi-Cloud)
 
+#### 追版截止日
+
+2023/9/1 at 09:40
 
 #### 安装教程
 
