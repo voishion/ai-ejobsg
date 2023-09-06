@@ -35,6 +35,29 @@
         </filter>
 	</appender>
 
+    <!-- SQL审计日志输出 -->
+	<appender name="file_sql_audit" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	    <file>${log.path}/sql_audit.log</file>
+        <!-- 循环政策：基于时间创建日志文件 -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 日志文件名格式 -->
+			<fileNamePattern>${log.path}/sql_audit.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<!-- 日志最大的历史 60天 -->
+			<maxHistory>60</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${log.pattern}</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!-- 过滤的级别 -->
+            <level>INFO</level>
+            <!-- 匹配时的操作：接收（记录） -->
+            <onMatch>ACCEPT</onMatch>
+            <!-- 不匹配时的操作：拒绝（不记录） -->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+	</appender>
+
     <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
 	    <file>${log.path}/error.log</file>
         <!-- 循环政策：基于时间创建日志文件 -->
@@ -57,10 +80,19 @@
         </filter>
     </appender>
 
-    <!-- 招聘模块日志级别控制  -->
-	<logger name="com.ejobsg" level="debug" />
 	<!-- Spring日志级别控制  -->
 	<logger name="org.springframework" level="warn" />
+
+    <!-- SQL审计日志器 -->
+    <logger name="sql_audit_logger" level="info" additivity="false">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file_sql_audit"/>
+    </logger>
+
+    <springProfile name="local,default,dev,test">
+        <!-- 招聘模块日志级别控制  -->
+        <logger name="com.ejobsg" level="debug" />
+    </springProfile>
 
 	<root level="info">
 		<appender-ref ref="console" />
