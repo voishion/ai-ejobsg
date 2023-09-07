@@ -40,6 +40,7 @@
         <hutool-all.version>5.8.15</hutool-all.version>
         <redisson-spring.version>3.16.2</redisson-spring.version>
         <guava.version>30.0-jre</guava.version>
+        <skywalking-toolkit.version>8.14.0</skywalking-toolkit.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -191,6 +192,18 @@
                 <version>${hutool-all.version}</version>
             </dependency>
 
+            <!-- skywalking 整合 logback -->
+            <dependency>
+                <groupId>org.apache.skywalking</groupId>
+                <artifactId>apm-toolkit-logback-1.x</artifactId>
+                <version>${skywalking-toolkit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.skywalking</groupId>
+                <artifactId>apm-toolkit-trace</artifactId>
+                <version>${skywalking-toolkit.version}</version>
+            </dependency>
+
             <!-- 核心模块 -->
             <dependency>
                 <groupId>com.ejobsg</groupId>
@@ -244,6 +257,13 @@
             <dependency>
                 <groupId>com.ejobsg</groupId>
                 <artifactId>ejobsg-common-redis</artifactId>
+                <version>${ejobsg.version}</version>
+            </dependency>
+
+            <!-- Skywalking日志收集 -->
+            <dependency>
+                <groupId>com.ejobsg</groupId>
+                <artifactId>ejobsg-common-skylog</artifactId>
                 <version>${ejobsg.version}</version>
             </dependency>
 

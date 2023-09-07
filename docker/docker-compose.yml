@@ -1,5 +1,57 @@
 version : '3.8'
 services:
+  ejobsg-elasticsearch:
+    image: elasticsearch:7.17.6
+    container_name: ejobsg-elasticsearch
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      # 设置集群名称
+      cluster.name: ejobsg-elasticsearch
+      # 以单一节点模式启动
+      discovery.type: single-node
+      # 设置使用jvm内存大小
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+      TZ: Asia/Shanghai
+    volumes:
+#      - ./elk/elasticsearch/plugins:/usr/share/elasticsearch/plugins
+#      - ./elk/elasticsearch/data:/usr/share/elasticsearch/data
+#      - ./elk/elasticsearch/logs:/usr/share/elasticsearch/logs
+      - /Users/voishion/work/server/docker/elk-ejobsg/elasticsearch/plugins:/usr/share/elasticsearch/plugins
+      - /Users/voishion/work/server/docker/elk-ejobsg/elasticsearch/data:/usr/share/elasticsearch/data
+      - /Users/voishion/work/server/docker/elk-ejobsg/elasticsearch/logs:/usr/share/elasticsearch/logs
+
+  ejobsg-sky-oap:
+    image: apache/skywalking-oap-server:9.3.0
+    container_name: ejobsg-sky-oap
+    environment:
+      JAVA_OPTS: -Xms1G -Xmx2G
+      #记录数据的有效期，单位天
+      SW_CORE_RECORD_DATA_TTL: 7
+      #分析指标数据的有效期，单位天
+      SW_CORE_METRICS_DATA_TTL: 7
+      SW_STORAGE: elasticsearch
+      SW_STORAGE_ES_CLUSTER_NODES: ejobsg-elasticsearch:9200
+      TZ: Asia/Shanghai
+    ports:
+      - "11800:11800"
+      - "12800:12800"
+    depends_on:
+      - ejobsg-elasticsearch
+
+  ejobsg-sky-ui:
+    image: apache/skywalking-ui:9.3.0
+    container_name: ejobsg-sky-ui
+    ports:
+      - "18080:18080"
+    environment:
+      SW_SERVER_PORT: 18080
+      SW_OAP_ADDRESS: http://ejobsg-sky-oap:12800
+      TZ: Asia/Shanghai
+    depends_on:
+      - ejobsg-sky-oap
+
   ejobsg-nacos:
     container_name: ejobsg-nacos
     image: nacos/nacos-server:2.0.3
@@ -92,6 +144,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    volumes:
+      - ./skywalking/agent/:/home/skywalking/agent
     depends_on:
       - ejobsg-redis
     links:
@@ -103,7 +157,7 @@ services:
       context: ./ejobsg/auth
       dockerfile: Dockerfile
     ports:
-      - "9200:9200"
+      - "9205:9205"
     depends_on:
       - ejobsg-redis
     links:
@@ -167,7 +221,7 @@ services:
       context: ./ejobsg/modules/file
       dockerfile: Dockerfile
     ports:
-      - "9300:9300"
+      - "9206:9206"
     volumes:
     - ./ejobsg/uploadPath:/home/ejobsg/uploadPath
 
