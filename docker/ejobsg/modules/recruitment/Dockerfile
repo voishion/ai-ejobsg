@@ -22,6 +22,6 @@ COPY ./jar/ejobsg-modules-recruitment.jar /home/ejobsg/ejobsg-modules-recruitmen
 ENTRYPOINT ["java", \
             "-Djava.security.egd=file:/dev/./urandom", \
             "-Dspring.profiles.active=dev", \
-            "-Dskywalking.agent.service_name=ejobsg-gateway", \
+            "-Dskywalking.agent.service_name=ejobsg::ejobsg-modules-recruitment", \
             "-javaagent:/home/skywalking/agent/skywalking-agent.jar", \
             "-jar", "ejobsg-modules-recruitment.jar"]

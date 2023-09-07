@@ -25,7 +25,7 @@ ENTRYPOINT ["java", \
             "-Djava.security.egd=file:/dev/./urandom", \
             "-Dserver.port=${SERVER_PORT}", \
             "-Dspring.profiles.active=dev", \
-            "-Dskywalking.agent.service_name=ejobsg-gateway", \
+            "-Dskywalking.agent.service_name=ejobsg::ejobsg-gateway", \
             "-javaagent:/home/skywalking/agent/skywalking-agent.jar", \
             "-jar", "ejobsg-gateway.jar"]
 

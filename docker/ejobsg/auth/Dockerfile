@@ -22,6 +22,6 @@ COPY ./jar/ejobsg-auth.jar /home/ejobsg/ejobsg-auth.jar
 ENTRYPOINT ["java", \
             "-Djava.security.egd=file:/dev/./urandom", \
             "-Dspring.profiles.active=dev", \
-            "-Dskywalking.agent.service_name=ejobsg-gateway", \
+            "-Dskywalking.agent.service_name=ejobsg::ejobsg-auth", \
             "-javaagent:/home/skywalking/agent/skywalking-agent.jar", \
             "-jar", "ejobsg-auth.jar"]
