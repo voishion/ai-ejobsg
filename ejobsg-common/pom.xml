@@ -18,6 +18,7 @@
         <module>ejobsg-common-datascope</module>
         <module>ejobsg-common-datasource</module>
         <module>ejobsg-common-business</module>
+        <module>ejobsg-common-skylog</module>
     </modules>
 
     <artifactId>ejobsg-common</artifactId>

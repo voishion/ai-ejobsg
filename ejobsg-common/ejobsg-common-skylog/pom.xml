@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.ejobsg</groupId>
+        <artifactId>ejobsg-common</artifactId>
+        <version>3.6.3</version>
+    </parent>
+
+    <artifactId>ejobsg-common-skylog</artifactId>
+
+    <description>
+        ejobsg-common-skylog Skywalking日志收集模块
+    </description>
+
+    <dependencies>
+        <!-- skywalking 整合 logback -->
+        <dependency>
+            <groupId>org.apache.skywalking</groupId>
+            <artifactId>apm-toolkit-logback-1.x</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.skywalking</groupId>
+            <artifactId>apm-toolkit-trace</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
