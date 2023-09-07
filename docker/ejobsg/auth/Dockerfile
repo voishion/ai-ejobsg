@@ -1,5 +1,5 @@
 # 基础镜像
-FROM  openjdk:8-jre
+FROM anapsix/alpine-java:8_server-jre_unlimited
 # author
 MAINTAINER ejobsg
 
@@ -9,10 +9,19 @@ RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 # 挂载目录
 VOLUME /home/ejobsg
 # 创建目录
-RUN mkdir -p /home/ejobsg
+RUN mkdir -p /home/ejobsg \
+    /home/ejobsg/logs  \
+    /home/ejobsg/temp  \
+    /home/skywalking/agent
+
 # 指定路径
 WORKDIR /home/ejobsg
 # 复制jar文件到路径
 COPY ./jar/ejobsg-auth.jar /home/ejobsg/ejobsg-auth.jar
 # 启动认证服务
-ENTRYPOINT ["java", "-jar", "ejobsg-auth.jar", "-Dspring.profiles.active=dev", "-Djava.security.egd=file:/dev/./urandom"]
+ENTRYPOINT ["java", \
+            "-Djava.security.egd=file:/dev/./urandom", \
+            "-Dspring.profiles.active=dev", \
+            "-Dskywalking.agent.service_name=ejobsg-gateway", \
+            "-javaagent:/home/skywalking/agent/skywalking-agent.jar", \
+            "-jar", "ejobsg-auth.jar"]

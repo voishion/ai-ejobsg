@@ -64,6 +64,12 @@
             <artifactId>ejobsg-common-security</artifactId>
         </dependency>
 
+        <!-- Skywalking 日志收集 -->
+        <dependency>
+            <groupId>com.ejobsg</groupId>
+            <artifactId>ejobsg-common-skylog</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
