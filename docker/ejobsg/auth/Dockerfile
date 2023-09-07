@@ -15,4 +15,4 @@ WORKDIR /home/ejobsg
 # 复制jar文件到路径
 COPY ./jar/ejobsg-auth.jar /home/ejobsg/ejobsg-auth.jar
 # 启动认证服务
-ENTRYPOINT ["java", "-jar", "ejobsg-auth.jar", "--spring.profiles.active=dev", "-Djava.security.egd=file:/dev/./urandom"]
+ENTRYPOINT ["java", "-jar", "ejobsg-auth.jar", "-Dspring.profiles.active=dev", "-Djava.security.egd=file:/dev/./urandom"]
