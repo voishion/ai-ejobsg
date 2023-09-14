@@ -88,12 +88,6 @@
             <artifactId>ejobsg-common-logstash</artifactId>
         </dependency>
 
-        <!-- Skywalking 日志收集 -->
-        <dependency>
-            <groupId>com.ejobsg</groupId>
-            <artifactId>ejobsg-common-skylog</artifactId>
-        </dependency>
-
         <!-- Swagger
         <dependency>
             <groupId>io.springfox</groupId>

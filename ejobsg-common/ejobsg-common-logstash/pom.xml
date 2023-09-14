@@ -16,6 +16,11 @@
     </description>
 
     <dependencies>
+        <!-- Skywalking 日志收集 -->
+        <dependency>
+            <groupId>com.ejobsg</groupId>
+            <artifactId>ejobsg-common-skylog</artifactId>
+        </dependency>
         <dependency>
             <groupId>net.logstash.logback</groupId>
             <artifactId>logstash-logback-encoder</artifactId>
