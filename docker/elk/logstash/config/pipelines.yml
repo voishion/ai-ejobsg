@@ -8,9 +8,19 @@
 - pipeline.id: logstash-springboot
   path.config: "/usr/share/logstash/pipelines/log_springboot_sync/springboot-logstash.conf"
 
+# table_mirror_sync
+
 - pipeline.id: table_mirror_sync_biz_class
   path.config: "/usr/share/logstash/pipelines/table_mirror_sync/biz_class.conf"
 
 - pipeline.id: table_mirror_sync_biz_student
   path.config: "/usr/share/logstash/pipelines/table_mirror_sync/biz_student.conf"
+
+# table_wide_sync
+
+- pipeline.id: table_wide_sync_biz_class_statistics_detail
+  path.config: "/usr/share/logstash/pipelines/table_wide_sync/biz_class_statistics_detail.conf"
+
+- pipeline.id: table_wide_sync_biz_class_student_detail
+  path.config: "/usr/share/logstash/pipelines/table_wide_sync/biz_class_student_detail.conf"
 
