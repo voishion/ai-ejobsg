@@ -6,11 +6,11 @@
 #  path.config: "/usr/share/logstash/pipeline"
 
 - pipeline.id: logstash-springboot
-  path.config: "./log_springboot_sync/logstash-springboot.conf"
+  path.config: "/usr/share/logstash/config/log_springboot_sync/springboot-logstash.conf"
 
 - pipeline.id: table_mirror_sync_biz_class
-  path.config: "./table_mirror_sync/biz_class.conf"
+  path.config: "/usr/share/logstash/config/table_mirror_sync/biz_class.conf"
 
 - pipeline.id: table_mirror_sync_biz_student
-  path.config: "./table_mirror_sync/biz_student.conf"
+  path.config: "/usr/share/logstash/config/table_mirror_sync/biz_student.conf"
 
