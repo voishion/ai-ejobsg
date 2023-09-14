@@ -47,6 +47,12 @@ services:
     ports:
       - "4560:4560"
     volumes:
+      # 配置文件
+      - ./elk/logstash/config/jvm.options:/usr/share/logstash/config/jvm.options
+      - ./elk/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./elk/logstash/config/pipelines.yml:/usr/share/logstash/config/pipelines.yml
+      # 任务配置文件目录
+      - ./elk/logstash/pipelines:/usr/share/logstash/pipelines
       # 任务跟踪文件目录
       - /Users/voishion/work/server/docker/elk-ejobsg/logstash/tracking:/usr/share/logstash/tracking
     depends_on:

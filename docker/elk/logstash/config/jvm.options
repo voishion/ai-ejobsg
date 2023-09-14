@@ -3,7 +3,7 @@
 # Xms represents the initial size of total heap space
 # Xmx represents the maximum size of total heap space
 
--Xms128m
+-Xms1g
 -Xmx1g
 
 ################################################################
@@ -17,9 +17,9 @@
 ################################################################
 
 ## GC configuration
-#-XX:+UseConcMarkSweepGC
--XX:CMSInitiatingOccupancyFraction=75
--XX:+UseCMSInitiatingOccupancyOnly
+8-13:-XX:+UseConcMarkSweepGC
+8-13:-XX:CMSInitiatingOccupancyFraction=75
+8-13:-XX:+UseCMSInitiatingOccupancyOnly
 
 ## Locale
 # Set the locale language
@@ -81,3 +81,6 @@
 -Dlog4j2.isThreadContextMapInheritable=true
 
 -Duser.timezone=Asia/Shanghai
+
+17-:--add-opens java.base/sun.nio.ch=ALL-UNNAMED
+17-:--add-opens java.base/java.io=ALL-UNNAMED
