@@ -22,6 +22,38 @@ services:
       - /Users/voishion/work/server/docker/elk-ejobsg/elasticsearch/data:/usr/share/elasticsearch/data
       - /Users/voishion/work/server/docker/elk-ejobsg/elasticsearch/logs:/usr/share/elasticsearch/logs
 
+  ejobsg-kibana:
+    image: kibana:7.17.6
+    container_name: ejobsg-kibana
+    ports:
+      - "5601:5601"
+    depends_on:
+      # kibana在elasticsearch启动之后再启动
+      - ejobsg-elasticsearch
+    environment:
+      #设置系统语言文中文
+      I18N_LOCALE: zh-CN
+      # 访问域名
+      # SERVER_PUBLICBASEURL: https://kibana.cloud.com
+    volumes:
+#      - ./elk/kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
+      - /Users/voishion/work/server/docker/elk-ejobsg/kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
+
+  ejobsg-logstash:
+    container_name: ejobsg-logstash
+    build:
+      context: ./elk/logstash
+      dockerfile: Dockerfile
+    ports:
+      - "4560:4560"
+    volumes:
+      # 任务跟踪文件目录
+      - /Users/voishion/work/server/docker/elk-ejobsg/logstash/tracking:/usr/share/logstash/tracking
+    depends_on:
+      - ejobsg-elasticsearch
+    links:
+      - ejobsg-elasticsearch
+
   ejobsg-sky-oap:
     image: apache/skywalking-oap-server:9.3.0
     container_name: ejobsg-sky-oap

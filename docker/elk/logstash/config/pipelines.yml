@@ -1,0 +1,16 @@
+# This file is where you define your pipelines. You can define multiple.
+# For more information on multiple pipelines, see the documentation:
+#   https://www.elastic.co/guide/en/logstash/current/multiple-pipelines.html
+
+#- pipeline.id: main
+#  path.config: "/usr/share/logstash/pipeline"
+
+- pipeline.id: logstash-springboot
+  path.config: "./log_springboot_sync/logstash-springboot.conf"
+
+- pipeline.id: table_mirror_sync_biz_class
+  path.config: "./table_mirror_sync/biz_class.conf"
+
+- pipeline.id: table_mirror_sync_biz_student
+  path.config: "./table_mirror_sync/biz_student.conf"
+
