@@ -24,6 +24,6 @@
 
     <root level="info">
         <appender-ref ref="console"/>
-        <appender-ref ref="sky_log"/>
+        <!--<appender-ref ref="sky_log"/>-->
     </root>
 </included>
