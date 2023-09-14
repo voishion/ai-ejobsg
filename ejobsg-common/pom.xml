@@ -19,6 +19,7 @@
         <module>ejobsg-common-datasource</module>
         <module>ejobsg-common-business</module>
         <module>ejobsg-common-skylog</module>
+        <module>ejobsg-common-logstash</module>
     </modules>
 
     <artifactId>ejobsg-common</artifactId>

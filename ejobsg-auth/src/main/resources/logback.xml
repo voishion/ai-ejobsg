@@ -92,6 +92,9 @@
         <appender-ref ref="file_error"/>
     </appender>
 
+    <!-- 开启logstash日志收集 -->
+    <include resource="logback-logstash.xml"/>
+
     <!-- 开启Skywalking日志收集 -->
     <include resource="logback-skylog.xml"/>
 

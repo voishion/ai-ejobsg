@@ -41,6 +41,7 @@
         <redisson-spring.version>3.16.2</redisson-spring.version>
         <guava.version>30.0-jre</guava.version>
         <skywalking-toolkit.version>8.14.0</skywalking-toolkit.version>
+        <logstash.version>7.2</logstash.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -204,6 +205,13 @@
                 <version>${skywalking-toolkit.version}</version>
             </dependency>
 
+            <!-- logstash -->
+            <dependency>
+                <groupId>net.logstash.logback</groupId>
+                <artifactId>logstash-logback-encoder</artifactId>
+                <version>${logstash.version}</version>
+            </dependency>
+
             <!-- 核心模块 -->
             <dependency>
                 <groupId>com.ejobsg</groupId>
@@ -264,6 +272,13 @@
             <dependency>
                 <groupId>com.ejobsg</groupId>
                 <artifactId>ejobsg-common-skylog</artifactId>
+                <version>${ejobsg.version}</version>
+            </dependency>
+
+            <!-- Logstash日志推送模块 -->
+            <dependency>
+                <groupId>com.ejobsg</groupId>
+                <artifactId>ejobsg-common-logstash</artifactId>
                 <version>${ejobsg.version}</version>
             </dependency>
 

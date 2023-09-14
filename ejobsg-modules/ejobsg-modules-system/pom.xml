@@ -78,6 +78,12 @@
             <artifactId>ejobsg-common-swagger</artifactId>
         </dependency>
 
+        <!-- Logstash 日志收集 -->
+        <dependency>
+            <groupId>com.ejobsg</groupId>
+            <artifactId>ejobsg-common-logstash</artifactId>
+        </dependency>
+
         <!-- Skywalking 日志收集 -->
         <dependency>
             <groupId>com.ejobsg</groupId>
