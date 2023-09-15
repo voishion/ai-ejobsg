@@ -10,6 +10,8 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import cn.hutool.core.io.FileUtil;
 import org.apache.commons.lang3.ArrayUtils;
 import com.ejobsg.common.core.utils.StringUtils;
 
@@ -18,7 +20,7 @@ import com.ejobsg.common.core.utils.StringUtils;
  *
  * @author lilu
  */
-public class FileUtils
+public class FileUtils extends FileUtil
 {
     /** 字符常量：斜杠 {@code '/'} */
     public static final char SLASH = '/';

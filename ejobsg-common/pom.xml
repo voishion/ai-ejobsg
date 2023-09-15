@@ -20,6 +20,7 @@
         <module>ejobsg-common-business</module>
         <module>ejobsg-common-skylog</module>
         <module>ejobsg-common-logstash</module>
+        <module>ejobsg-common-web</module>
     </modules>
 
     <artifactId>ejobsg-common</artifactId>
