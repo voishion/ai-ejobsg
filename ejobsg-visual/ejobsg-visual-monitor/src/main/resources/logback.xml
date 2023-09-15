@@ -3,6 +3,9 @@
     <!-- 日志存放路径 -->
 	<property name="log.path" value="logs/ejobsg-visual-monitor" />
 
+    <!-- 日志输出格式 -->
+    <include resource="logback-pattern.xml"/>
+
     <!-- 控制台输出 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
