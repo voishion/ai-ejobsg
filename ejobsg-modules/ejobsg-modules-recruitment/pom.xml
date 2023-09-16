@@ -17,36 +17,16 @@
 
     <dependencies>
 
-        <!-- MyBatis-Flex -->
-        <dependency>
-            <groupId>com.mybatis-flex</groupId>
-            <artifactId>mybatis-flex-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mybatis-flex</groupId>
-            <artifactId>mybatis-flex-processor</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mybatis-flex</groupId>
-            <artifactId>mybatis-flex-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
-        </dependency>
-
-        <!-- mybatis-flex-codegen -->
-        <dependency>
-            <groupId>com.mybatis-flex</groupId>
-            <artifactId>mybatis-flex-codegen</artifactId>
-            <version>1.5.7</version>
-            <scope>compile</scope>
-        </dependency>
-
         <!-- Web服务 -->
         <dependency>
             <groupId>com.ejobsg</groupId>
             <artifactId>ejobsg-common-web</artifactId>
+        </dependency>
+
+        <!-- Ejobsg Common Business -->
+        <dependency>
+            <groupId>com.ejobsg</groupId>
+            <artifactId>ejobsg-common-business</artifactId>
         </dependency>
 
         <!-- Ejobsg Common DataSource -->
@@ -71,12 +51,6 @@
         <dependency>
             <groupId>com.ejobsg</groupId>
             <artifactId>ejobsg-common-swagger</artifactId>
-        </dependency>
-
-        <!-- Ejobsg Common Business -->
-        <dependency>
-            <groupId>com.ejobsg</groupId>
-            <artifactId>ejobsg-common-business</artifactId>
         </dependency>
 
         <!-- Skywalking 日志收集 -->
