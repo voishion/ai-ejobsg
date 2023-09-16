@@ -47,10 +47,10 @@
             <artifactId>ejobsg-common-swagger</artifactId>
         </dependency>
 
-        <!-- Skywalking 日志收集 -->
+        <!-- Logstash 日志收集 -->
         <dependency>
             <groupId>com.ejobsg</groupId>
-            <artifactId>ejobsg-common-skylog</artifactId>
+            <artifactId>ejobsg-common-logstash</artifactId>
         </dependency>
 
     </dependencies>

@@ -1,16 +1,20 @@
 package com.ejobsg.file;
 
+import com.ejobsg.common.security.annotation.EnableCustomConfig;
+import com.ejobsg.common.security.annotation.EnableEjFeignClients;
+import com.ejobsg.common.swagger.annotation.EnableCustomSwagger2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import com.ejobsg.common.swagger.annotation.EnableCustomSwagger2;
 
 /**
  * 文件服务
  *
  * @author lilu
  */
+@EnableCustomConfig
 @EnableCustomSwagger2
+@EnableEjFeignClients
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class EjobsgFileApplication {
 
