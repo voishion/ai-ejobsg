@@ -6,19 +6,7 @@
     <!-- 日志输出格式 -->
     <include resource="logback-pattern.xml"/>
 
-    <!-- 控制台输出 -->
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>${console.log.pattern}</pattern>
-            <charset>utf-8</charset>
-        </encoder>
-    </appender>
-
     <!-- 通用日志收集 -->
     <include resource="logback-common.xml"/>
 
-	<!--系统操作日志-->
-    <root level="info">
-        <appender-ref ref="console"/>
-    </root>
 </configuration>

@@ -5,6 +5,11 @@
     <!-- 日志输出格式 -->
     <property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n"/>
     <!-- 日志输出格式 -->
+    <property name="sky.log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - [%tid] - %msg%n"/>
+
+    <!-- 日志输出格式 -->
     <property name="console.log.pattern" value="%red(%d{HH:mm:ss.SSS}) %green([%thread]) %highlight(%-5level) %boldMagenta(%logger{20}) - %blue([%method,%line]) - %msg%n"/>
+    <!-- 日志输出格式 -->
+    <property name="sky.console.log.pattern" value="%red(%d{HH:mm:ss.SSS}) %green([%thread]) %highlight(%-5level) %boldMagenta(%logger{20}) - %blue([%method,%line]) - %green([%tid]) - %msg%n"/>
 
 </included>
