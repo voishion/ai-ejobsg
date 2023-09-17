@@ -1,36 +1,40 @@
 package com.ejobsg.common.log.aspect;
 
-import java.util.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
-import org.apache.commons.compress.utils.Sets;
-import org.apache.commons.lang3.ArrayUtils;
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.*;
-import org.aspectj.lang.reflect.MethodSignature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.core.NamedThreadLocal;
-import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.http.HttpMethod;
-import org.springframework.stereotype.Component;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.multipart.MultipartFile;
 import com.alibaba.fastjson2.JSON;
 import com.ejobsg.common.core.utils.ServletUtils;
 import com.ejobsg.common.core.utils.StringUtils;
 import com.ejobsg.common.core.utils.ip.IpUtils;
 import com.ejobsg.common.log.annotation.Log;
 import com.ejobsg.common.log.enums.BusinessStatus;
+import com.ejobsg.common.log.enums.BusinessType;
 import com.ejobsg.common.log.filter.PropertyPreExcludeFilter;
 import com.ejobsg.common.log.service.AsyncLogService;
 import com.ejobsg.common.security.utils.SecurityUtils;
 import com.ejobsg.system.api.domain.SysOperLog;
+import org.apache.commons.compress.utils.Sets;
+import org.apache.commons.lang3.ArrayUtils;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Component;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 
 /**
  * 操作日志记录处理
@@ -46,11 +50,6 @@ public class LogAspect {
      * 排除敏感属性字段
      */
     public static final String[] EXCLUDE_PROPERTIES = {"password", "oldPassword", "newPassword", "confirmPassword"};
-
-    /**
-     * 计算操作消耗时间
-     */
-    private static final ThreadLocal<Long> TIME_THREADLOCAL = new NamedThreadLocal<Long>("Cost Time");
 
     /**
      * 允许打印请求日志的环境
@@ -74,50 +73,52 @@ public class LogAspect {
     }
 
     /**
-     * 处理请求前执行
+     * 请求处理环绕执行
      */
-    @Before(value = "logPrint()")
-    public void boBefore(JoinPoint joinPoint) {
-        TIME_THREADLOCAL.set(System.currentTimeMillis());
+    @Around("logPrint()")
+    public Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
+        Object result = null;
+        Throwable throwable = null;
+        long startTime = System.currentTimeMillis();
+        try {
+            result = joinPoint.proceed();
+        } catch (Throwable e) {
+            throwable = e;
+        }
+        if (isNeedAop(joinPoint)) {
+            long costTime = System.currentTimeMillis() - startTime;
+            handleLog(joinPoint, throwable, result, costTime);
+        }
+        if (throwable != null) {
+            throw throwable;
+        }
+        return result;
     }
 
-    /**
-     * 处理完请求后执行
-     *
-     * @param joinPoint 切点
-     */
-    @AfterReturning(pointcut = "logPrint()", returning = "jsonResult")
-    public void doAfterReturning(JoinPoint joinPoint, Object jsonResult) {
-        handleLog(joinPoint, null, jsonResult);
-    }
-
-    /**
-     * 拦截异常操作
-     *
-     * @param joinPoint 切点
-     * @param e         异常
-     */
-    @AfterThrowing(value = "logPrint()", throwing = "e")
-    public void doAfterThrowing(JoinPoint joinPoint, Exception e) {
-        handleLog(joinPoint, e, null);
-    }
-
-    protected void handleLog(final JoinPoint joinPoint, final Exception e, Object jsonResult) {
+    private boolean isNeedAop(final ProceedingJoinPoint joinPoint) {
+        boolean isNeedAop = false;
         try {
             FeignClient feignClient = AnnotationUtils.findAnnotation(joinPoint.getTarget().getClass(), FeignClient.class);
             if (Objects.isNull(feignClient)) {
-                processLog(joinPoint, e, jsonResult);
+                isNeedAop = true;
             }
         } catch (Exception exp) {
             // 记录本地异常日志
-            log.error("异常信息:{}", exp.getMessage());
-            exp.printStackTrace();
-        } finally {
-            TIME_THREADLOCAL.remove();
+            log.error("异常信息:{}", exp.getMessage(), exp);
+        }
+        return isNeedAop;
+    }
+
+    protected void handleLog(final ProceedingJoinPoint joinPoint, final Throwable e, Object jsonResult, Long costTime) {
+        try {
+            processLog(joinPoint, e, jsonResult, costTime);
+        } catch (Throwable exp) {
+            // 记录本地异常日志
+            log.error("异常信息:{}", exp.getMessage(), exp);
         }
     }
 
-    private void processLog(final JoinPoint joinPoint, final Exception e, Object jsonResult) throws Exception {
+    private void processLog(final ProceedingJoinPoint joinPoint, final Throwable e, Object jsonResult, Long costTime) throws Throwable {
         // *========数据库日志=========*//
         SysOperLog operLog = new SysOperLog();
         operLog.setStatus(BusinessStatus.SUCCESS.ordinal());
@@ -148,8 +149,7 @@ public class LogAspect {
         Log controllerLog = getControllerLog((MethodSignature) joinPoint.getSignature());
         // 处理设置注解上的参数
         getControllerMethodDescription(joinPoint, controllerLog, operLog, jsonResult, request);
-        // 设置消耗时间
-        operLog.setCostTime(System.currentTimeMillis() - TIME_THREADLOCAL.get());
+        operLog.setCostTime(costTime);
 
         if (Objects.nonNull(controllerLog)) {
             // 保存数据库
@@ -165,7 +165,6 @@ public class LogAspect {
                 print(operLog);
             }
         }
-
     }
 
     /**
@@ -191,7 +190,7 @@ public class LogAspect {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("请求响应日志信息：\n【请求地址】:").append("【").append(StringUtils.format("{}|{}", operLog.getOperUrl(), operLog.getRequestMethod())).append("】");
         if (StrUtil.isNotBlank(operLog.getTitle()) && Objects.nonNull(operLog.getBusinessType())) {
-            stringBuilder.append("\n【操作模块】:").append("【").append(StringUtils.format("{}|{}", operLog.getTitle(), operLog.getBusinessType())).append("】");
+            stringBuilder.append("\n【操作模块】:").append("【").append(StringUtils.format("{}|{}", operLog.getTitle(), BusinessType.values()[operLog.getBusinessType()].name())).append("】");
         }
         stringBuilder.append("\n【登录信息】:").append("【").append(StringUtils.format("{}|{}", Optional.ofNullable(operLog.getOperName()).orElse("--"), operLog.getOperIp())).append("】");
         stringBuilder.append("\n【操作方法】:").append("【").append(operLog.getMethod()).append("】");
@@ -263,7 +262,7 @@ public class LogAspect {
      */
     private String argsArrayToString(Object[] paramsArray, String[] excludeParamNames) {
         StringBuilder params = new StringBuilder();
-        if (paramsArray != null && paramsArray.length > 0) {
+        if (ArrayUtil.isNotEmpty(paramsArray)) {
             for (Object o : paramsArray) {
                 if (StringUtils.isNotNull(o) && !isFilterObject(o)) {
                     try {
