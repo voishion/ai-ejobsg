@@ -43,6 +43,7 @@
         <skywalking-toolkit.version>8.14.0</skywalking-toolkit.version>
         <logstash.version>7.2</logstash.version>
         <ip2region.version>2.7.0</ip2region.version>
+        <powerjob.version>4.3.6</powerjob.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -122,6 +123,13 @@
                 <groupId>com.mybatis-flex</groupId>
                 <artifactId>mybatis-flex-core</artifactId>
                 <version>${mybatis-flex.version}</version>
+            </dependency>
+
+            <!-- PowerJob执行器 -->
+            <dependency>
+                <groupId>tech.powerjob</groupId>
+                <artifactId>powerjob-worker-spring-boot-starter</artifactId>
+                <version>${powerjob.version}</version>
             </dependency>
 
             <!-- 验证码 -->

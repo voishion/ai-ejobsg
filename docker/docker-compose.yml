@@ -175,6 +175,24 @@ services:
     links:
       - ejobsg-gateway
 
+  ejobsg-powerjob:
+    container_name: ejobsg-powerjob
+    image: powerjob/powerjob-server:4.3.6
+    ports:
+      - "7700:7700"
+      - "10086:10086"
+      - "10010:10010"
+    volumes:
+      - ~/work/server/docker/powerjob-ejobsg/powerjob-server:/root/powerjob/server
+      - ~/.m2:/root/.m2
+    environment:
+      JVMOPTIONS: "-Xmx512m -server -XX:+UseG1GC -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=7 -XX:GCLogFileSize=100M -Xloggc:/root/powerjob/server/gc.log"
+      PARAMS: "--oms.mongodb.enable=false --spring.profiles.active=product --spring.datasource.core.jdbc-url=jdbc:mysql://ejobsg-mysql:3306/ai-ejobsg-powerjob?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai --spring.datasource.core.username=root --spring.datasource.core.password=feaafeaadf6b4e61be1037dd6d522ef1 --oms.storage.dfs.mysql_series.url=jdbc:mysql://ejobsg-mysql:3306/ai-ejobsg-powerjob?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai"
+    depends_on:
+      - ejobsg-mysql
+    links:
+      - ejobsg-mysql
+
   ejobsg-gateway:
     container_name: ejobsg-gateway
     build:
