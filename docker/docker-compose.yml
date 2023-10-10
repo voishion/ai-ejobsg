@@ -90,6 +90,56 @@ services:
     depends_on:
       - ejobsg-sky-oap
 
+  ejobsg-zookeeper:
+    image: bitnami/zookeeper:3.8.0
+    container_name: ejobsg-zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      TZ: Asia/Shanghai
+      ALLOW_ANONYMOUS_LOGIN: "yes"
+      ZOO_SERVER_ID: 1
+      ZOO_PORT_NUMBER: 2181
+      # 自带的控制台 一般用不上可自行开启
+      ZOO_ENABLE_ADMIN_SERVER: "no"
+      # 自带控制台的端口
+      ZOO_ADMIN_SERVER_PORT_NUMBER: 8080
+
+  ejobsg-kafka:
+    image: bitnami/kafka:3.2.0
+    container_name: ejobsg-kafka
+    ports:
+      - "9092:9092"
+    environment:
+      TZ: Asia/Shanghai
+      # 更多变量 查看文档 https://github.com/bitnami/bitnami-docker-kafka/blob/master/README.md
+      KAFKA_BROKER_ID: 1
+      # 监听端口
+      KAFKA_CFG_LISTENERS: PLAINTEXT://:9092
+      # 实际访问ip 本地用 127 内网用 192 外网用 外网ip
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://ejobsg-kafka:9092
+      KAFKA_CFG_ZOOKEEPER_CONNECT: ejobsg-zookeeper:2181
+      ALLOW_PLAINTEXT_LISTENER: "yes"
+    volumes:
+      #- /docker/kafka/data:/bitnami/kafka/data
+      - ~/work/server/docker/kafka-ejobsg/data:/bitnami/kafka/data
+    depends_on:
+      - ejobsg-zookeeper
+
+  ejobsg-kafka-manager:
+    image: sheepkiller/kafka-manager:latest
+    container_name: ejobsg-kafka-manager
+    ports:
+      - "19092:19092"
+    environment:
+      ZK_HOSTS: ejobsg-zookeeper:2181
+      APPLICATION_SECRET: letmein
+      KAFKA_MANAGER_USERNAME: ejobsg
+      KAFKA_MANAGER_PASSWORD: ejobsg123
+      KM_ARGS: -Dhttp.port=19092
+    depends_on:
+      - ejobsg-kafka
+
   ejobsg-nacos:
     container_name: ejobsg-nacos
     image: nacos/nacos-server:2.0.3
