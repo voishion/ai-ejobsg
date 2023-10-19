@@ -39,6 +39,23 @@ services:
 #      - ./elk/kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
       - /Users/voishion/work/server/docker/elk-ejobsg/kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
 
+  ejobsg-kibana-ty:
+    image: kibana:7.9.1
+    container_name: ejobsg-kibana-ty
+    ports:
+      - "5601:5601"
+#    depends_on:
+      # kibana在elasticsearch启动之后再启动
+#      - ejobsg-elasticsearch
+    environment:
+      #设置系统语言文中文
+      I18N_LOCALE: zh-CN
+      # 访问域名
+      # SERVER_PUBLICBASEURL: https://kibana.cloud.com
+    volumes:
+#      - ./elk/kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
+      - /Users/voishion/work/server/docker/elk-ejobsg/kibana/config/kibana_ty.yml:/usr/share/kibana/config/kibana.yml
+
   ejobsg-logstash:
     container_name: ejobsg-logstash
     build:
