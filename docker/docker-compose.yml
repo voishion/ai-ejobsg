@@ -227,16 +227,19 @@ services:
 
   ejobsg-nginx:
     container_name: ejobsg-nginx
-    image: nginx:1.21.5
     build:
       context: ./nginx
+    environment:
+      - TZ=Asia/Shanghai
     ports:
       - "80:80"
+      - "443:443"
     volumes:
-#      - ./nginx/html/dist:/home/ejobsg/projects/ejobsg-ui
-#      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/logs:/var/log/nginx
+      - /etc/localtime:/etc/localtime
+      - /usr/share/zoneinfo/Asia/Shanghai:/etc/timezone
+      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/logs:/var/log/nginx
     depends_on:
       - ejobsg-gateway
     links:

@@ -1,15 +1,15 @@
 # 基础镜像
-FROM nginx
+FROM nginx:1.21.5
 # author
 MAINTAINER ejobsg
 
 # 挂载目录
-VOLUME /home/ejobsg/projects/ejobsg-ui
+VOLUME /home/ejobsg-ui
 # 创建目录
-RUN mkdir -p /home/ejobsg/projects/ejobsg-ui
+RUN mkdir -p /home/ejobsg-ui \
+    /etc/nginx/ssl
+
 # 指定路径
-WORKDIR /home/ejobsg/projects/ejobsg-ui
-# 复制conf文件到路径
-COPY ./conf/nginx.conf /etc/nginx/nginx.conf
+WORKDIR /home/ejobsg-ui
 # 复制html文件到路径
-COPY ./html/dist /home/ejobsg/projects/ejobsg-ui
+COPY ./html/dist /home/ejobsg-ui

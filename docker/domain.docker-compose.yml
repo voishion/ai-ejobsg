@@ -12,7 +12,6 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime
       - /usr/share/zoneinfo/Asia/Shanghai:/etc/timezone
-      - ./nginx/html/ejobsg-ui/dist:/home/ejobsg-ui
       - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/ssl:/etc/nginx/ssl
