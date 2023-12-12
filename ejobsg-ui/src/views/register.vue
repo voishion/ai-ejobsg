@@ -34,7 +34,7 @@
           v-model="registerForm.code"
           auto-complete="off"
           placeholder="验证码"
-          style="width: 63%"
+          style="width: 68%"
           @keyup.enter.native="handleRegister"
         >
           <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon" />
@@ -183,7 +183,7 @@ export default {
   color: #bfbfbf;
 }
 .register-code {
-  width: 33%;
+  width: 29.5%;
   height: 38px;
   float: right;
   img {
