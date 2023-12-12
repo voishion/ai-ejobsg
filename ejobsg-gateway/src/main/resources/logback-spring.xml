@@ -4,13 +4,14 @@
     <property name="log.path" value="logs/ejobsg-gateway"/>
 
     <!-- 日志输出格式 -->
-    <property name="sky.log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - [%tid] - %msg%n"/>
-    <!-- 日志输出格式 -->
-    <property name="sky.console.log.pattern" value="%red(%d{HH:mm:ss.SSS}) %green([%thread]) %highlight(%-5level) %boldMagenta(%logger{20}) - %blue([%method,%line]) - %green([%tid]) - %msg%n"/>
+    <include resource="logback-pattern.xml"/>
 
     <!-- 开启logstash日志收集 -->
-    <include resource="logback-logstash.xml"/>
+    <!--<include resource="logback-logstash.xml"/>-->
+
+    <!-- 通用日志收集 -->
+    <include resource="logback-common.xml"/>
 
     <!-- 开启Skywalking日志收集 -->
-    <include resource="logback-skylog.xml"/>
+    <!--<include resource="logback-skylog.xml"/>-->
 </configuration>
