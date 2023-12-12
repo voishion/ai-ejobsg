@@ -1,5 +1,6 @@
 package com.ejobsg.file.service;
 
+import org.apache.commons.lang3.SystemUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,9 @@ public class LocalSysFileServiceImpl implements ISysFileService
     @Override
     public String uploadFile(MultipartFile file) throws Exception
     {
+        if (SystemUtils.IS_OS_MAC) {
+            localFilePath = "/Users/voishion/work/test/ejobsg/uploadPath";
+        }
         String name = FileUploadUtils.upload(localFilePath, file);
         String url = domain + localFilePrefix + name;
         return url;
